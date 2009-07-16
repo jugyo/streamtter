@@ -17,7 +17,7 @@ class Streamtter
 
   def start(&block)
     s = TCPSocket.open("stream.twitter.com", 80)
-    auth = Base64.b64encode("#{username}:#{password}")
+    auth = Base64.encode64("#{username}:#{password}")
     s.write <<-EOS
 GET /spritzer.json HTTP/1.1
 Host: stream.twitter.com
