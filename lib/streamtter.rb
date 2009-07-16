@@ -11,11 +11,14 @@ class Streamtter
   end
 
   def initialize(username, password)
+    raise 'specify username!' unless username
+    raise 'specify password!' unless password
     @username = username
     @password = password
   end
 
   def start(&block)
+    puts 'start'
     s = TCPSocket.open("stream.twitter.com", 80)
     auth = Base64.encode64("#{username}:#{password}")
     s.write <<-EOS
@@ -31,6 +34,7 @@ Authorization: Basic #{auth}
       end
     ensure
       s.close
+      puts 'connection closed'
     end
   end
 end
