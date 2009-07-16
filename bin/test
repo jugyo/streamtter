@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+$: << File.dirname(__FILE__) + '/../lib'
+require 'streamtter'
+
+Streamtter.new(*ARGV[0..1]).start do |json|
+  p json
+end
