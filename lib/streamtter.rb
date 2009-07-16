@@ -6,6 +6,10 @@ require 'json'
 class Streamtter
   attr_accessor :username, :password
 
+  def self.start(*args, &block)
+    self.new(*args).start(&block)
+  end
+
   def initialize(username, password)
     @username = username
     @password = password
