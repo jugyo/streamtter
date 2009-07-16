@@ -5,5 +5,5 @@ require 'streamtter'
 
 username, password = *ARGV[0..1]
 Streamtter.start(username, password) do |status|
-  p status
+  puts status["source"]
 end
