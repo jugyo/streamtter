@@ -17,7 +17,7 @@ end
 username, password = *ARGV[0..1]
 Streamtter.start(username, password) do |status|
   if /<a href="(.*)?">(.*)?<\/a>/ =~ status['source']
-    app_name, app_url = $1, $2
+    app_url, app_name = $1, $2
     DB[:logs] << {
       :status_id => status['id'],
       :app_name => app_name,
