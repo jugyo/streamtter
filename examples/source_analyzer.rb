@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'sequel'
+require 'time'
 $: << File.dirname(__FILE__) + '/../lib'
 require 'streamtter'
 
@@ -11,6 +12,7 @@ unless DB.table_exists?(:logs)
     [:status_id, :app_name, :app_url, :user_id, :user_name].each do |name|
       String name
     end
+    Time :created_at
   end
 end
 
@@ -23,7 +25,8 @@ Streamtter.start(username, password) do |status|
       :app_name => app_name,
       :app_url => app_url,
       :user_id => status['user']['id'],
-      :user_name => status['user']['screen_name']
+      :user_name => status['user']['screen_name'],
+      :created_at => Time.parse(status['created_at'])
     }
   end
 end
